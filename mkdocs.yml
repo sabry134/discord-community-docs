@@ -1,0 +1,184 @@
+site_name: Project Requests
+site_author: Sabry
+site_description: >-
+  Official project requests documentation how to guide.
+
+
+copyright: Copyright &copy; 2023 - Sabry134
+
+theme:
+  name: material
+  features:
+    - announce.dismiss
+    # - content.code.select
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
+
+# Plugins
+plugins:
+  - blog
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - exclude-search:
+      exclude:
+        - hidden-api.md
+        - notes-wiki.md
+  - termynal:
+      prompt_literal_start:
+        - "$"
+        - ">"
+  - minify:
+      minify_html: true
+  - swagger-ui-tag
+  - autolinks
+  - mkdocs-video
+
+# Hooks
+hooks:
+  - material/overrides/hooks/shortcodes.py
+  - material/overrides/hooks/translations.py
+
+# Additional configuration
+extra:
+  annotate:
+    json: [.s2]
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+  - Dashboard Policy: 
+    - rules.md
+    - property.md
+  - Security Policy:
+    - security.md
+    - ddos-protection.md
+    - cybersecurity-requests.md
+  - Project Managements:
+    - how-should-my-request-look-like.md
+    - discord-requests.md
+    - reject-policy.md
+    - project-follow-up.md
+    - project-procedure.md
+    - why-is-my-key-invalid.md
+    - where-can-I-host-my-project.md
+    - project-templates.md
+    - deployment.md
+  - Platform Usage:
+    - usage.md
+    - community.md
+    - mobile-version.md
+    - packages-templates.md
+    - premium-packages.md
+    - promocodes.md
+  - Extensions:
+    - extensions.md
+    - notifications.md
+    - self-services.md
+    - webhook-usage.md
+  - Developers Zone:
+    - package-usage.md
+    - package-installation.md
+    - functions-usage.md
+    - public-api.md
+    - package-troubleshooting.md
+    - api-documentation.md
+    - developer-tools.md
+    - sandbox.md
+  - User accessiblity:
+    - idea-developers.md
+    - ux-chart.md
+  - Help:
+    - support.md
+    - feedbacks.md
+    - emulator-usage.md
+  - Development plans:
+    - development-plans.md
+    - updates.md
