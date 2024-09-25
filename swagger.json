@@ -1,0 +1,299 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API Documentation for Project Requests Server",
+    "version": "1.0.0",
+    "title": "Project Requests API"
+  },
+  "host": "project-direct-requests.vercel.app",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Project Requests",
+      "description": "Endpoints for managing project requests"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/project-update/{key}": {
+      "post": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Update project details",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project details updated successfully."
+          },
+          "400": {
+            "description": "Missing required fields in the request body."
+          },
+          "404": {
+            "description": "Project not found."
+          },
+          "500": {
+            "description": "Error handling project update."
+          }
+        }
+      }
+    },
+    "/project-info/{key}": {
+      "get": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Get project information",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project information retrieved successfully."
+          },
+          "404": {
+            "description": "Project not found."
+          },
+          "500": {
+            "description": "Error getting project info."
+          }
+        }
+      }
+    },
+    "/project/{key}": {
+      "get": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Get project details",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project details retrieved successfully."
+          },
+          "404": {
+            "description": "Project not found."
+          },
+          "500": {
+            "description": "Error getting project details."
+          }
+        }
+      }
+    },
+    "/escalation-request/{key}": {
+      "post": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Send escalation request",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Escalation request sent successfully."
+          },
+          "404": {
+            "description": "Key not found."
+          },
+          "500": {
+            "description": "Error sending escalation request."
+          }
+        }
+      }
+    },
+    "/official-request": {
+      "post": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Create official project request",
+        "responses": {
+          "200": {
+            "description": "Official project request created successfully."
+          },
+          "400": {
+            "description": "Repository name is required or repository privacy must be true or false."
+          },
+          "422": {
+            "description": "Repository name is already taken or reached the max number of requests per week."
+          },
+          "500": {
+            "description": "Error creating repository."
+          }
+        }
+      }
+    },
+    "/discord-update/{key}": {
+      "get": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Get Discord project details",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Discord project details retrieved successfully."
+          },
+          "404": {
+            "description": "Project not found."
+          },
+          "500": {
+            "description": "Error fetching project details."
+          }
+        }
+      }
+    },
+    "/discord-request": {
+      "post": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Create Discord project request",
+        "responses": {
+          "200": {
+            "description": "Discord project request created successfully."
+          },
+          "400": {
+            "description": "Missing request field in the body."
+          },
+          "403": {
+            "description": "You reached the maximum number of requests per month."
+          }
+        }
+      }
+    },
+    "/callback": {
+      "get": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Handle Discord callback",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Callback handled successfully."
+          },
+          "400": {
+            "description": "Invalid code provided."
+          },
+          "500": {
+            "description": "Error handling callback."
+          }
+        }
+      }
+    },
+    "/verify-email": {
+      "post": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Verify user's email",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "verification_code",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verified successfully."
+          },
+          "400": {
+            "description": "Invalid verification code or email provided."
+          },
+          "500": {
+            "description": "Error verifying email."
+          }
+        }
+      }
+    },
+    "/email": {
+      "post": {
+        "tags": [
+          "Project Requests"
+        ],
+        "summary": "Send an email",
+        "parameters": [
+          {
+            "name": "recipient",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email sent successfully."
+          },
+          "400": {
+            "description": "Invalid recipient, subject, or body provided."
+          },
+          "500": {
+            "description": "Error sending email."
+          }
+        }
+      }
+    }
+  }
+}
