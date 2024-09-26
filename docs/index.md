@@ -1,79 +1,182 @@
-# Usage Guide
+# Installation
 
-!!! danger
-      Users are encouraged to familiarize themselves with the platform's guidelines and policies to ensure a positive and seamless experience. The platform reserves the right to modify features and policies for improved functionality and user experience.
+## Requirements
 
-This comprehensive guide is designed to assist users in navigating our platform effectively. Read on to understand the various features and functionalities available.
+- **Node.js Version**: You must use Node.js version 18 or higher. To install and switch to Node.js v18, use the following commands:
+<!-- termynal -->
 
-## Project Request
+```
+> nvm install 18
+v18.20.4 is already installed.
+Now using node v18.20.4 (npm v10.8.3)
+> nvm use 18
+Now using node v18.20.4 (npm v10.8.3)
+```
+<br>
+- **Github SSH KEY**: It is not mandatory, but in this guide, the repository clone will be done using the SSH key method.
 
-Initiating a project request is the first step for users. Once submitted, our system assigns a dedicated developer to the project. To keep users informed, we provide notifications on the website. Users can also opt for Discord webhook notifications, enhancing real-time updates.
+<!-- termynal -->
 
-## Feedback
+```
+> git clone git@github.com:sabry134/Discord-Community-Dashboard.git
+Cloning into 'Discord-Community-Dashboard'...
+remote: Enumerating objects: 573, done.
+remote: Counting objects: 100% (54/54), done.
+remote: Compressing objects: 100% (45/45), done.
+remote: Total 573 (delta 36), reused 20 (delta 8), pack-reused 519 (from 1)
+Receiving objects: 100% (573/573), 142.76 MiB | 7.00 MiB/s, done.
+Resolving deltas: 100% (106/106), done.
+```
 
-We value user feedback and encourage users to submit their thoughts on completed projects. It's important to maintain a respectful and constructive tone when providing feedback.
+## Getting Started
 
-## Follow Up
+### With Docker
 
-### Finding Your Project ID
+To start the application using Docker, run:
 
-Locating your Project ID is crucial for project follow-up. Users can find their unique Project ID in the settings section of their account.
+```bash
+./start.sh
+```
 
-### Using the Follow Up Page
+To stop the Docker, please run:
 
-1. **Entering Project ID:**
-   - Head to the Follow Up page.
-   - Input your Project ID.
+```bash
+./stop.sh
+```
+
+
+### Without Docker
+
+To start the application without Docker, open a terminal and run:
+
+<!-- termynal -->
+
+```
+> cd discord_community_front && ./start_no_docker.sh
+Compiled successfully!
+
+You can now view discord-community-dashboard in the browser.
+
+  Local:            http://localhost:8080/discord-community-dashboard
+  On Your Network:  http://[NETWORK IP]:8080/discord-community-dashboard
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+```
+
+
+In another terminal, start the backend server:
+
+<!-- termynal -->
+
+```
+> cd discord_community_server && node server.js
+(node:173369) [MONGODB DRIVER] Warning: useNewUrlParser is a deprecated option: useNewUrlParser has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:173369) [MONGODB DRIVER] Warning: useUnifiedTopology is a deprecated option: useUnifiedTopology has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
+Server is listening on port 8081
+MongoDB connected successfully
+AllowedAccess with ID: 495265351270137883 already exists
+AdminWhitelist with ID: 495265351270137883 already exists
+```
+
+<br>
+## Environment Variables
+
+You need to create a .env file in the discord_community_server directory to configure your application. The following variables must be included in your .env file:
+
+```env
+MONGODB_URI=
+DISCORD_CLIENT_ID=
+DISCORD_CLIENT_SECRET=
+DISCORD_BOT_TOKEN=
+DEFAULT_ID=
+ADMIN_DEFAULT_ID=
+GUILD_ID=
+DISCORD_EVERYONE_ROLE_ID=
+COOKIE_SECRET=
+DISCORD_REDIRECT_URI=http://localhost:8081/discord-oauth-callback
+```
+
+
+Make sure to fill in the values appropriately. Do not share sensitive information publicly.
+
+<br>
+## Discord setup
+
+Besides oauth which will be explained later. Here's how you can get a few .env data.
+
+
+COOKIE_SECRET:
+
+<!-- termynal -->
+
+```
+> node
+Welcome to Node.js v18.20.4.
+Type ".help" for more information.
+> crypto.randomUUID()
+'YOUR_CRYPTO_SECRET'
+```
+
+
+**DEFAULT_ID & ADMIN_DEFAULT_ID:** Your discord ID
+<br>
+**GUILD_ID:** Your server ID
+<br>
+**DISCORD_EVERYONE_ROLE_ID:** The ID for the @everyone role (same as your Guild ID)
+
+<br>
+## Discord Oauth setup
+
+### Overview
+
+To integrate Discord OAuth into your application, follow these steps to create an application in the Discord Developer Portal and obtain your credentials.
+
+#### Step 1: Create a Discord Application
+
+1. **Go to the Discord Developer Portal**: Visit [Discord Developer Portal](https://discord.com/developers/applications).
+2. **Log In**: Sign in with your Discord account.
+3. **Create a New Application**:
+   - Click on the "New Application" button.
+   - Enter a name for your application and click "Create".
+
+#### Step 2: Set Up OAuth2
+
+1. **Navigate to the OAuth2 Tab**:
+   - Select your application from the list.
+   - Click on the "OAuth2" tab in the left sidebar.
    
-2. **Checking Progress:**
-   - Click on the "Progress" button.
-   - View assigned developers, progression percentage, and project status.
-   - Status options include Rejected, Completed, On Hold, or In Progress.
+2. **Configure OAuth2 Settings**:
+   - **Redirects**: Under "Redirects," add your redirect URI. This should be your backend endpoint that handles the OAuth callback (e.g., `http://localhost:8081/discord-oauth-callback`).
+   - **Scopes**: Select the scopes your application requires. For basic user authentication, select:
+     - `identify`
+     - `join`
+   - **Bot**: If your application requires bot functionality, you can also generate a bot token under the "Bot" tab.
 
-## Server Generation
+3. **Generate the OAuth2 URL**:
+   - Scroll down to "OAuth2 URL Generator."
+   - Select the scopes you configured earlier.
+   - Copy the generated URL.
 
-Our platform offers a Server Generation page, allowing users to create servers in any language for personal projects. This feature is not mandatory for official projects, and users are reminded that the company holds no responsibility for issues arising from personal server usage.
+#### Step 3: Set Up Your `.env` File
 
-## Alerts
+Add the following lines to your `.env` file in the `discord_community_server` directory, filling in the placeholders with your application's values:
 
-### General Alerts
+```env
+DISCORD_CLIENT_ID=your_client_id
+DISCORD_CLIENT_SECRET=your_client_secret
+DISCORD_REDIRECT_URI=http://localhost:8081/discord-oauth-callback
+```
+<br>
+## MongoDB Database Setup
 
-Users receive general alerts containing important news, information, and updates. These alerts keep users informed about the platform's status.
+To set up a MongoDB database, follow these steps:
 
-### Quick Alerts
-
-Occasionally, quick alerts may appear at the top of the page. These brief messages convey urgent or time-sensitive information.
-
-## Maintenance
-
-### Problem Reporting
-
-Users encountering post-project issues can use the Maintenance page for assistance. The reporting process involves providing:
-- A YouTube video showcasing the problem.
-- The GitHub repository link.
-- A detailed explanation of the problem.
-- The Project ID.
-
-Following this process may result in a change in project status based on issue assessment.
-
-### Update Duration
-
-It's essential to note that updating a project may take up to two months, depending on the number of ongoing projects in the queue.
-
-## Prototype
-
-Our Prototype page allows users to generate GitHub repositories for personal projects. To use this feature, users must:
-- Generate a GitHub classic token.
-- Add the token to the settings.
-
-This page is exclusively for personal projects. Requests for assistance or follow-up on non-official links or organizations are not accepted.
-
-## Settings
-
-### Project IDs Storage
-
-The Settings section serves as a repository for all user Project IDs. Additionally, users can save their GitHub token here for personal project creation. It's important to clarify that no personal token is required for official project requests.
-
-## Punishment
-
-In cases of abuse or violation of platform guidelines, users may face punitive actions, including blacklisting. It is essential for all users to adhere to the platform's terms and conditions to maintain a healthy and respectful community.
+- Create an Account on MongoDB Atlas: Go to MongoDB Atlas and sign up for an account.
+- Create a New Cluster: After logging in, click on "Build a Cluster" and follow the prompts to create a new cluster.
+- Connect to Your Cluster: Once your cluster is created, click on "Connect" and follow the instructions to add your IP address and create a database user.
+- Get the Connection String: After setting up your user, you will be provided with a connection string. Replace the placeholder username and password in the string with your MongoDB user credentials.
+<br>

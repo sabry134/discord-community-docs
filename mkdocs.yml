@@ -1,7 +1,7 @@
-site_name: Project Requests
+site_name: Discord Community Dashboard
 site_author: Sabry
 site_description: >-
-  Official project requests documentation how to guide.
+  Official Discord Community Dashboard documentation how to guide.
 
 
 copyright: Copyright &copy; 2023 - Sabry134
@@ -133,52 +133,31 @@ markdown_extensions:
   - pymdownx.tilde
 
 nav:
-  - Home: index.md
-  - Dashboard Policy: 
-    - rules.md
-    - property.md
-  - Security Policy:
-    - security.md
-    - ddos-protection.md
-    - cybersecurity-requests.md
-  - Project Managements:
-    - how-should-my-request-look-like.md
-    - discord-requests.md
-    - reject-policy.md
-    - project-follow-up.md
-    - project-procedure.md
-    - why-is-my-key-invalid.md
-    - where-can-I-host-my-project.md
-    - project-templates.md
-    - deployment.md
-  - Platform Usage:
-    - usage.md
+  - Home:
+    - index.md
     - community.md
-    - mobile-version.md
-    - packages-templates.md
-    - premium-packages.md
-    - promocodes.md
+    - role-shop.md
+    - recruitment.md
+    - self-services.md
+    - events.md
+  - Admin Usage:
+    - moderation.md
+    - announcements.md
+    - bot-management.md
+    - roles.md
+    - logs.md
+  - Deployment:
+    - deployment.md
+    - docker.md
   - Extensions:
     - extensions.md
-    - notifications.md
-    - self-services.md
-    - webhook-usage.md
-  - Developers Zone:
-    - package-usage.md
-    - package-installation.md
-    - functions-usage.md
-    - public-api.md
-    - package-troubleshooting.md
-    - api-documentation.md
-    - developer-tools.md
-    - sandbox.md
-  - User accessiblity:
-    - idea-developers.md
-    - ux-chart.md
-  - Help:
+  - API:
+    - api.md
+    - swagger.md
+  - Policy & Support: 
+    - policy.md
     - support.md
-    - feedbacks.md
-    - emulator-usage.md
   - Development plans:
-    - development-plans.md
     - updates.md
+    - development-plans.md
+    - patch-notes.md
